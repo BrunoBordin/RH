@@ -1,7 +1,12 @@
-﻿namespace RH.Service.Interface
+﻿using RH.DTOs;
+using RH.Models;
+
+namespace RH.Service.Interface
 {
-    public interface ICandidatoService
+    public interface ICandidatoService : IService<Candidato>
     {
-        Task VincularTecncologiasUsuario(int idUsuario, List<int> idTecnologia);
+        Task Atualizar(CandidatoDto candidatoDto, int id);
+
+        Task Cadastrar(CandidatoDto candidatoDto);
     }
 }

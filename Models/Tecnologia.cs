@@ -2,9 +2,8 @@
 {
     public class Tecnologia : Entity
     {
-        public string Nome { get; set; }
+        public decimal Peso { get; set; }
 
-        public ICollection<CandidatoTecnologia> Candidatos { get; set; }
-        public ICollection<PesoTecnologia> PesosVagas { get; set; }
+        public ICollection<Candidato> Candidatos { get; set; }
     }
 }

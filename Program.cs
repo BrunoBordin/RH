@@ -1,10 +1,10 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using RH.Data;
-using RH.Repository.Interface;
 using RH.Repository;
-using RH.Service.Interface;
+using RH.Repository.Interface;
 using RH.Service;
-using FluentValidation.AspNetCore;
+using RH.Service.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //repositorios
 builder.Services.AddScoped<ICandidatoRepository, CandidatoRepository>();
 builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
 
 //serviços
 builder.Services.AddScoped<ICandidatoService, CandidatoService>();
 builder.Services.AddScoped<IEmpresaService, EmpresaService>();
+builder.Services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
 
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
@@ -27,8 +29,6 @@ builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidator
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 var app = builder.Build();
 

@@ -1,16 +1,9 @@
-﻿using RH.DTOs;
-using RH.Models;
+﻿using RH.Models;
 
 namespace RH.Repository.Interface
 {
-    public interface IEmpresaRepository
+    public interface IEmpresaRepository : IRepository<Empresa>
     {
-        Task CadastrarEmpresa(Empresa empresaDto);
 
-        Task CadastrarVaga(Vaga vagaDto, int empresaId);
-
-        Task<List<Vaga>> ObterVagasPorEmpresa(int empresaId);
-
-        Task CadastrarTecnologia(Tecnologia tecnologiaDto, int empresaId);
     }
 }

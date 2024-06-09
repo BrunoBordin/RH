@@ -18,35 +18,41 @@ namespace RH.Controllers
         [HttpGet("porId/{idEmpresa}")]
         public async Task<IActionResult> ObterPorId([FromRoute] int IdEmpresa)
         {
-            var result = await _empresaService.ObterPorId(IdEmpresa);
+            var result = await _empresaService.BuscarPorId(IdEmpresa);
             return Ok(result);
         }
 
         [HttpGet("listar")]
-        public async Task<IActionResult> ListarEmpresa()
+        public async Task<IActionResult> ListarEmpresas()
         {
-            List<EmpresaDto> result = await _empresaService.ListarEmpresa();
+            var result = await _empresaService.ListarTodos();
             return Ok(result);
         }
 
         [HttpPost("cadastrar")]
         public async Task<IActionResult> CadastrarEmpresa([FromBody] EmpresaDto empresaDto)
         {
-            await _empresaService.CadastrarEmpresa(empresaDto);
+            await _empresaService.Cadastrar(empresaDto);
             return Ok();
         }
 
         [HttpPut("atualizar/{idEmpresa}")]
         public async Task<IActionResult> Atualizar([FromBody] EmpresaDto empresaDto, [FromQuery] int idEmpresa)
         {
-            await _empresaService.AtualizarEmpresa(empresaDto, idEmpresa);
+            await _empresaService.Atualizar(empresaDto, idEmpresa);
             return Ok();
         }
 
         [HttpDelete("deletar/{idEmpresa}")]
         public async Task<IActionResult> Deletar([FromQuery] int idEmpresa)
         {
-            await _empresaService.DeletarEmpresa(idEmpresa);
+            var empresa = await _empresaService.BuscarPorId(idEmpresa);
+
+            if (empresa == null)
+            {
+                return NotFound();
+            }
+            await _empresaService.Deletar(empresa);
             return Ok();
         }
     }

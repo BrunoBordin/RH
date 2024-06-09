@@ -3,9 +3,9 @@ using RH.DTOs;
 
 namespace RH.Validators
 {
-    public class EmpresaDtoValidator : AbstractValidator<EmpresaDto>
+    public class CandidatoDtoValidator : AbstractValidator<CandidatoDto>
     {
-        public EmpresaDtoValidator()
+        public CandidatoDtoValidator()
         {
             RuleFor(x => x.Nome)
                 .NotEmpty().WithMessage("O nome é obrigatório ser informado.");

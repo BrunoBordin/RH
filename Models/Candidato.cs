@@ -2,6 +2,6 @@
 {
     public class Candidato : Entity
     {
-        public string Nome { get; set; }
+        public virtual ICollection<Tecnologia> Tecnologias { get; set; }
     }
 }

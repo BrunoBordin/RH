@@ -4,51 +4,38 @@ using RH.DTOs;
 using RH.Models;
 using RH.Repository.Interface;
 using RH.Service.Interface;
-using RH.Validators.Exceptions;
 
 namespace RH.Service
 {
-    public class EmpresaService : IEmpresaService
+    public class EmpresaService : ServiceBase<Empresa>, IEmpresaService
     {
-        private readonly IEmpresaRepository _empresaRepository;
         private readonly IMapper _mapper;
         private readonly IValidator<EmpresaDto> _empresaDtoValidator;
 
-        public EmpresaService(IEmpresaRepository empresaRepository, IMapper mapper, IValidator<EmpresaDto> empresaDtoValidator)
+        public EmpresaService(IEmpresaRepository empresaRepository, IMapper mapper, IValidator<EmpresaDto> empresaDtoValidator) : base(empresaRepository)
         {
-            _empresaRepository = empresaRepository;
             _mapper = mapper;
             _empresaDtoValidator = empresaDtoValidator;
         }
 
-        public async Task CadastrarEmpresa(EmpresaDto empresaDto)
+        public async Task Atualizar(EmpresaDto empresaDto, int id)
         {
-            var result = await _empresaDtoValidator.ValidateAsync(empresaDto);
+            var empresa = await _repository.BuscarPorId(id);
 
-            if (!result.IsValid)
+            if (empresa == null)
             {
-                var mensagensDeErro = result.Errors.Select(x => x.ErrorMessage).ToList();
-                throw new ValidationExceptions(mensagensDeErro);
+                throw new KeyNotFoundException("empresa nao encontrda");
             }
 
-            var empresa = _mapper.Map<Empresa>(empresaDto);
-
-            await _empresaRepository.CadastrarEmpresa(empresa);
+            _mapper.Map(empresaDto, empresa);
+            await _repository.Atualizar(empresa);
         }
 
-        public async Task<Tecnologia> CadastrarTecnologia(TecnologiaDto tecnologiaDto, int empresaId)
+        public async Task Cadastrar(EmpresaDto empresaDto)
         {
-            throw new NotImplementedException();
-        }
+            var entidade = _mapper.Map<Empresa>(empresaDto);
 
-        public async Task<Vaga> CadastrarVaga(VagaDto vagaDto, int empresaId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Vaga>> ObterVagasPorEmpresa(int empresaId)
-        {
-            throw new NotImplementedException();
+            await _repository.Cadastrar(entidade);
         }
     }
 }

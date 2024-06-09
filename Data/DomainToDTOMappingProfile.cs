@@ -8,9 +8,10 @@ namespace RH.Data
     {
         public DomainToDTOMappingProfile()
         {
-            CreateMap<Vaga, VagaDto>().ReverseMap();
-            CreateMap<Tecnologia, TecnologiaDto>().ReverseMap();
+            CreateMap<Candidato, CandidatoDto>().ReverseMap();
             CreateMap<Empresa, EmpresaDto>().ReverseMap();
+            CreateMap<Tecnologia, TecnologiaDto>().ReverseMap();
+            CreateMap<Vaga, VagaDto>().ReverseMap();
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public class Empresa : Entity
     {
-        public string Nome { get; set; }
+        public virtual ICollection<Vaga> Vagas { get; set; }
+
+        public virtual ICollection<Tecnologia> Tecnologias { get; set; }
     }
 }

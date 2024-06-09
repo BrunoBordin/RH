@@ -7,9 +7,8 @@ namespace RH.Validators
     {
         public VagaDtoValidator()
         {
-            RuleFor(x => x.Titulo)
-                .NotEmpty().WithMessage("O título é obrigatório ser infrmado.")
-                .MaximumLength(100).WithMessage("O título não pode ter mais que 100 caracteres.");
+            RuleFor(x => x.Nome)
+                .NotEmpty().WithMessage("O nome é obrigatório ser infrmado.");
         }
     }
 }
