@@ -1,12 +1,17 @@
 ﻿using RH.DTOs;
-using RH.Models;
 
 namespace RH.Service.Interface
 {
-    public interface ITecnologiaService : IService<Tecnologia>
+    public interface ITecnologiaService
     {
         Task Atualizar(TecnologiaDto tecnologiaDto, int id);
 
         Task Cadastrar(TecnologiaDto tecnologiaDto);
+
+        Task<IList<TecnologiaDto>> ListarTodos();
+
+        Task<TecnologiaDto> BuscarPorId(int id);
+
+        Task Deletar(TecnologiaDto entity);
     }
 }

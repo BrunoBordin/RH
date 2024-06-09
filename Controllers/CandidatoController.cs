@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RH.DTOs;
-using RH.Models;
 using RH.Service.Interface;
 
 namespace RH.Controllers
@@ -19,43 +18,103 @@ namespace RH.Controllers
         [HttpGet("porId/{id}")]
         public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
-            var result = await _candidatoService.BuscarPorId(id);
-            return Ok(result);
+            try
+            {
+                var result = await _candidatoService.BuscarPorId(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
         }
 
         [HttpGet("listar")]
         public async Task<IActionResult> ObterListaCandidatos()
         {
-            IList<Candidato> list = await _candidatoService.ListarTodos();
-            return Ok(list);
+            try
+            {
+                var list = await _candidatoService.ListarTodos();
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
         }
 
         [HttpPost("cadastrar")]
         public async Task<IActionResult> Cadastrar([FromBody] CandidatoDto candidatoDto)
         {
-            await _candidatoService.Cadastrar(candidatoDto);
-            return Ok();
+            try
+            {
+                await _candidatoService.Cadastrar(candidatoDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
         }
 
         [HttpPut("atualizar/{id}")]
         public async Task<IActionResult> Atualizar([FromBody] CandidatoDto candidatoDto, [FromRoute] int id)
         {
-            await _candidatoService.Atualizar(candidatoDto, id);
-            return Ok();
+            try
+            {
+                await _candidatoService.Atualizar(candidatoDto, id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Deletar([FromRoute] int id)
         {
-            var candidato = await _candidatoService.BuscarPorId(id);
-
-            if (candidato == null)
+            try
             {
-                return NotFound();
-            }
+                var candidato = await _candidatoService.BuscarPorId(id);
 
-            await _candidatoService.Deletar(candidato);
-            return Ok();
+                if (candidato == null)
+                {
+                    return NotFound();
+                }
+
+                await _candidatoService.Deletar(candidato);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("vincular-tecnologia")]
+        public async Task<IActionResult> VincularTecnologia(int idCandidato, List<int> idTecnologia)
+        {
+            try
+            {
+                var candidato = await _candidatoService.BuscarPorId(idCandidato);
+
+                if (candidato == null)
+                {
+                    return NotFound(new { Message = "Candidato não encontrado para vincular as tecnologias." });
+                }
+
+                await _candidatoService.VincularCandidatoTecnologia(idCandidato, idTecnologia);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
         }
     }
 }

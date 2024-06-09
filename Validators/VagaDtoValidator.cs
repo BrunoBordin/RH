@@ -7,8 +7,8 @@ namespace RH.Validators
     {
         public VagaDtoValidator()
         {
-            RuleFor(x => x.Nome)
-                .NotEmpty().WithMessage("O nome é obrigatório ser infrmado.");
+            RuleFor(x => x.Titulo)
+                .NotEmpty().WithMessage("O titulo é obrigatório ser infrmado.");
         }
     }
 }

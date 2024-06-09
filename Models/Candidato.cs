@@ -1,7 +1,11 @@
 ﻿namespace RH.Models
 {
-    public class Candidato : Entity
+    public class Candidato
     {
-        public virtual ICollection<Tecnologia> Tecnologias { get; set; }
+        public int IdCandidato { get; set; }
+        public string Nome { get; set; }
+        public int IdVaga { get; set; }
+        public Vaga Vaga { get; set; }
+        public ICollection<CandidatoTecnologia> CandidatoTecnologias { get; set; }
     }
 }

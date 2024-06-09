@@ -1,10 +1,8 @@
-﻿using RH.Models;
-
-namespace RH.DTOs
+﻿namespace RH.DTOs
 {
     public class VagaDto
     {
-        public string Nome { get; set; }
-        public virtual ICollection<Tecnologia> TecnologiasRequeridas { get; set; }
+        public string Titulo { get; set; }
+        public ICollection<VagaTecnologiaDto> VagaTecnologias { get; set; }
     }
 }

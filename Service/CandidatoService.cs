@@ -6,13 +6,20 @@ using RH.Service.Interface;
 
 namespace RH.Service
 {
-    public class CandidatoService : ServiceBase<Candidato>, ICandidatoService
+    public class CandidatoService : ICandidatoService
     {
         private readonly IMapper _mapper;
+        private readonly ITecnologiaService _tecService;
 
-        public CandidatoService(ICandidatoRepository candidatoRepository, IMapper mapper) : base(candidatoRepository)
+        protected readonly IRepository<Candidato> _repository;
+        private readonly ICandidatoRepository _candidatoRepository;
+
+        public CandidatoService(IRepository<Candidato> repository, IMapper mapper, ITecnologiaService tecService, ICandidatoRepository candidatoRepository)
         {
+            _repository = repository;
             _mapper = mapper;
+            _tecService = tecService;
+            _candidatoRepository = candidatoRepository;
         }
 
         public async Task Atualizar(CandidatoDto candidatoDto, int id)
@@ -32,6 +39,37 @@ namespace RH.Service
             var entidade = _mapper.Map<Candidato>(candidatoDto);
 
             await _repository.Cadastrar(entidade);
+        }
+
+        public async Task<IList<CandidatoDto>> ListarTodos()
+        {
+            var resultList = await _repository.ListarTodos();
+
+            return _mapper.Map<IList<CandidatoDto>>(resultList);
+        }
+
+        public async Task<CandidatoDto> BuscarPorId(int id)
+        {
+            var result = await _repository.BuscarPorId(id);
+
+            return _mapper.Map<CandidatoDto>(result);
+        }
+
+        public async Task Deletar(CandidatoDto entity)
+        {
+            var entidade = _mapper.Map<Candidato>(entity);
+            await _repository.Deletar(entidade);
+        }
+
+        public async Task VincularCandidatoTecnologia(int idCandidato, List<int> idsTecnologia)
+        {
+            var candidatoTecnologias = idsTecnologia.Select(idTecnologia => new CandidatoTecnologia
+            {
+                IdCandidato = idCandidato,
+                IdTecnologia = idTecnologia
+            }).ToList();
+
+            await _candidatoRepository.VincularCandidatoTecnologia(candidatoTecnologias);
         }
     }
 }

@@ -4,9 +4,10 @@ namespace RH.DTOs
 {
     public class CandidatoDto
     {
-        public int Id { get; set; }
+        public int IdCandidato { get; set; }
         public string Nome { get; set; }
-
-        public virtual ICollection<Tecnologia> Tecnologias { get; set; }
+        public int IdVaga { get; set; }
+        public Vaga Vaga { get; set; }
+        public ICollection<CandidatoTecnologiaDto> CandidatoTecnologias { get; set; }
     }
 }

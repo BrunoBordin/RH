@@ -1,7 +1,10 @@
 ﻿namespace RH.Models
 {
-    public class Vaga : Entity
+    public class Vaga
     {
-        public virtual ICollection<Tecnologia> TecnologiasRequeridas { get; set; }
+        public int IdVaga { get; set; }
+        public string Titulo { get; set; }
+        public string Descricao { get; set; }
+        public ICollection<VagaTecnologia> VagaTecnologias { get; set; }
     }
 }

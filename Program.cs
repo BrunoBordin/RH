@@ -15,13 +15,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //repositorios
 builder.Services.AddScoped<ICandidatoRepository, CandidatoRepository>();
-builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+builder.Services.AddScoped<ITecnologiaRepository, TecnologiaRepository>();
+builder.Services.AddScoped<IVagaRepository, VagaRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
 
 //serviços
 builder.Services.AddScoped<ICandidatoService, CandidatoService>();
-builder.Services.AddScoped<IEmpresaService, EmpresaService>();
-builder.Services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
+builder.Services.AddScoped<ITecnologiaService, TecnologiaService>();
+builder.Services.AddScoped<IVagaService, VagaService>();
+builder.Services.AddScoped<ITriagemService, TriagemService>();
 
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 

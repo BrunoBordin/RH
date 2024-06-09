@@ -6,12 +6,12 @@ using RH.Service.Interface;
 
 namespace RH.Service
 {
-    public class TecnologiaService : ServiceBase<Tecnologia>, ITecnologiaService
+    public class TecnologiaService : ITecnologiaService
     {
         private readonly IMapper _mapper;
-        private readonly ITecnologiaRepository _repository;
+        private readonly IRepository<Tecnologia> _repository;
 
-        public TecnologiaService(IMapper mapper, ITecnologiaRepository repository) : base(repository)
+        public TecnologiaService(IMapper mapper, IRepository<Tecnologia> repository)
         {
             _mapper = mapper;
             _repository = repository;
@@ -35,6 +35,26 @@ namespace RH.Service
             var entidade = _mapper.Map<Tecnologia>(tecnologiaDto);
 
             await _repository.Cadastrar(entidade);
+        }
+
+        public async Task<IList<TecnologiaDto>> ListarTodos()
+        {
+            var resultList = await _repository.ListarTodos();
+
+            return _mapper.Map<IList<TecnologiaDto>>(resultList);
+        }
+
+        public async Task<TecnologiaDto> BuscarPorId(int id)
+        {
+            var result = await _repository.BuscarPorId(id);
+
+            return _mapper.Map<TecnologiaDto>(result);
+        }
+
+        public async Task Deletar(TecnologiaDto entity)
+        {
+            var entidade = _mapper.Map<Tecnologia>(entity);
+            await _repository.Deletar(entidade);
         }
     }
 }

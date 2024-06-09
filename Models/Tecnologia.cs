@@ -1,9 +1,8 @@
 ﻿namespace RH.Models
 {
-    public class Tecnologia : Entity
+    public class Tecnologia
     {
-        public decimal Peso { get; set; }
-
-        public ICollection<Candidato> Candidatos { get; set; }
+        public int IdTecnologia { get; set; }
+        public string Nome { get; set; }
     }
 }
