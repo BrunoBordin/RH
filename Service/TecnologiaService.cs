@@ -19,14 +19,8 @@ namespace RH.Service
 
         public async Task Atualizar(TecnologiaDto tecnologiaDto, int id)
         {
-            var tecnologia = await _repository.BuscarPorId(id);
-
-            if (tecnologia == null)
-            {
-                throw new KeyNotFoundException("tecnologia nao encontrda");
-            }
-
-            _mapper.Map(tecnologiaDto, tecnologia);
+            var tecnologia = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("tecnologia nao encontrda");
+            tecnologia.Nome = tecnologiaDto.Nome;
             await _repository.Atualizar(tecnologia);
         }
 

@@ -19,9 +19,12 @@ namespace RH.Service
             _repositoryVaga = repositoryVaga;
         }
 
-        public Task Atualizar(VagaDto vagaDto, int id)
+        public async Task Atualizar(VagaDto vagaDto, int id)
         {
-            throw new NotImplementedException();
+            var vaga = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Vaga nao encontrada.");
+            vaga.Titulo = vaga.Titulo;
+            vaga.Descricao = vaga.Descricao;
+            await _repository.Atualizar(vaga);
         }
 
         public async Task Cadastrar(VagaDto vagaDto)

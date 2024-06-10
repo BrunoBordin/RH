@@ -75,7 +75,7 @@ namespace RH.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         public async Task<IActionResult> Deletar([FromRoute] int id)
         {
             try

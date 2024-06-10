@@ -79,7 +79,7 @@ namespace RH.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("deletar/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Deletar([FromRoute] int id)
         {

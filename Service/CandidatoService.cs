@@ -24,13 +24,8 @@ namespace RH.Service
 
         public async Task Atualizar(CandidatoDto candidatoDto, int id)
         {
-            var candidato = await _repository.BuscarPorId(id);
-            if (candidato == null)
-            {
-                throw new KeyNotFoundException("Candidato nao encontrado");
-            }
-
-            _mapper.Map(candidatoDto, candidato);
+            var candidato = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Candidato nao encontrado");
+            candidato.Nome = candidatoDto.Nome;
             await _repository.Atualizar(candidato);
         }
 
