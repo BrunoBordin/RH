@@ -50,9 +50,9 @@ namespace RH.Service
             return _mapper.Map<CandidatoDto>(result);
         }
 
-        public async Task Deletar(CandidatoDto entity)
+        public async Task Deletar(int id)
         {
-            var entidade = _mapper.Map<Candidato>(entity);
+            var entidade = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Candidato não encontrado");
             await _repository.Deletar(entidade);
         }
 

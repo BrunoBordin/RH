@@ -12,6 +12,6 @@ namespace RH.Service.Interface
 
         Task<TecnologiaDto> BuscarPorId(int id);
 
-        Task Deletar(TecnologiaDto entity);
+        Task Deletar(int id);
     }
 }

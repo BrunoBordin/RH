@@ -12,7 +12,7 @@ namespace RH.Service.Interface
 
         Task<VagaDto> BuscarPorId(int id);
 
-        Task Deletar(VagaDto entity);
+        Task Deletar(int id);
 
         Task DefinirPesos(int idVaga, Dictionary<int, int> tecnologiaPesos);
     }

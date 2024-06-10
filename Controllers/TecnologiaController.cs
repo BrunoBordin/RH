@@ -80,12 +80,8 @@ namespace RH.Controllers
         {
             try
             {
-                var tecnologia = await _service.BuscarPorId(id);
-                if (tecnologia == null)
-                {
-                    return NotFound();
-                }
-                await _service.Deletar(tecnologia);
+                
+                await _service.Deletar(id);
                 return Ok();
             }
             catch (Exception ex)

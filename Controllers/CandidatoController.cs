@@ -80,14 +80,8 @@ namespace RH.Controllers
         {
             try
             {
-                var candidato = await _candidatoService.BuscarPorId(id);
 
-                if (candidato == null)
-                {
-                    return NotFound();
-                }
-
-                await _candidatoService.Deletar(candidato);
+                await _candidatoService.Deletar(id);
                 return Ok();
             }
             catch (Exception ex)

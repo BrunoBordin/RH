@@ -85,12 +85,7 @@ namespace RH.Controllers
         {
             try
             {
-                var vaga = await _vagaService.BuscarPorId(id);
-                if (vaga == null)
-                {
-                    return NotFound();
-                }
-                await _vagaService.Deletar(vaga);
+                await _vagaService.Deletar(id);
                 return Ok();
             }
             catch (Exception ex)

@@ -48,9 +48,10 @@ namespace RH.Service
             return _mapper.Map<VagaDto>(result);
         }
 
-        public async Task Deletar(VagaDto entity)
+        public async Task Deletar(int id)
         {
-            var entidade = _mapper.Map<Vaga>(entity);
+            var entidade = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Vaga não encontrada");
+
             await _repository.Deletar(entidade);
         }
 

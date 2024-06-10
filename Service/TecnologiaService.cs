@@ -45,10 +45,10 @@ namespace RH.Service
             return _mapper.Map<TecnologiaDto>(result);
         }
 
-        public async Task Deletar(TecnologiaDto entity)
+        public async Task Deletar(int id)
         {
-            var entidade = _mapper.Map<Tecnologia>(entity);
-            await _repository.Deletar(entidade);
+            var tecnologia = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Tecnologia não encontrada");
+            await _repository.Deletar(tecnologia);
         }
     }
 }
