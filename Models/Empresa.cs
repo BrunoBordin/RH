@@ -1,6 +1,6 @@
-﻿namespace RH.DTOs
+﻿namespace RH.Models
 {
-    public class TecnologiaDto
+    public class Empresa
     {
         public int Id { get; set; }
         public string Nome { get; set; }

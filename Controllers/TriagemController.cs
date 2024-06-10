@@ -16,7 +16,7 @@ namespace RH.Controllers
         }
 
         [HttpGet("{idVaga}")]
-        [ProducesResponseType(typeof(List<CandidatoPontuadoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<VagaTecnologiaRequisitoDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GerarRelatorio([FromRoute] int idVaga)
         {
             try

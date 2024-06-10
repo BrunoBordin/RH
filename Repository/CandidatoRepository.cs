@@ -16,14 +16,14 @@ namespace RH.Repository
 
         public async Task<List<Candidato>> BuscarCandidatosPorIdVaga(int idVaga)
         {
-            var candidatos = await _dbContext.Candidato
+           // var candidatos = await _dbContext.Candidato
 
-           .Where(c => c.IdVaga == idVaga)
-           .Include(c => c.CandidatoTecnologias)
-           .ThenInclude(ct => ct.Tecnologia)
-           .ToListAsync();
+           //.Where(c => c.IdVaga == idVaga)
+           //.Include(c => c.CandidatoTecnologias)
+           //.ThenInclude(ct => ct.Tecnologia)
+           //.ToListAsync();
 
-            return candidatos;
+            return null;
         }
 
         public async Task VincularCandidatoTecnologia(List<CandidatoTecnologia> candidatoTecnologias)
