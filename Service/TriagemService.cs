@@ -18,35 +18,39 @@ namespace RH.Service
             _mapper = mapper;
         }
 
-        public async Task<List<CandidatoPontuadoDto>> GerarRelatorioCandidatosVaga(int idVaga)
+        public async Task<List<VagaTecnologiaRequisitoDto>> GerarRelatorioCandidatosVaga(int idVaga)
         {
-            var vaga = await _repositoryVaga.BuscarVagaTecnologiasPorIdVaga(idVaga);
+            //var vaga = await _repositoryVaga.BuscarVagaTecnologiasPorIdVaga(idVaga);
 
-            var candidatos = await _repositoryCandidato.BuscarCandidatosPorIdVaga(idVaga);
+            //var candidatos = await _repositoryCandidato.BuscarCandidatosPorIdVaga(idVaga);
 
-            var candidatosPontuados = new List<CandidatoPontuadoDto>();
+            //var candidatosPontuados = new List<CandidatoPontuadoDto>();
 
-            foreach (var candidato in candidatos)
-            {
-                int pontuacaoTotal = 0;
+            //foreach (var candidato in candidatos)
+            //{
+            //    int pontuacaoTotal = 0;
 
-                foreach (var ct in candidato.CandidatoTecnologias)
-                {
-                    var vagaTecnologia = vaga.VagaTecnologias.FirstOrDefault(vt => vt.IdTecnologia == ct.IdTecnologia);
-                    if (vagaTecnologia != null)
-                    {
-                        pontuacaoTotal += vagaTecnologia.Peso;
-                    }
-                }
-                var entidade = _mapper.Map<CandidatoDto>(candidato);
-                candidatosPontuados.Add(new CandidatoPontuadoDto
-                {
-                    CandidatoDto = entidade,
-                    Pontuacao = pontuacaoTotal
-                });
-            }
+            //    foreach (var ct in candidato.CandidatoTecnologias)
+            //    {
+            //        var vagaTecnologiaRequisito = vaga.VagaTecnologiaRequisitos
+            //                                          .FirstOrDefault(vtr => vtr.IdTecnologia == ct.IdTecnologia);
+            //        if (vagaTecnologiaRequisito != null)
+            //        {
+            //            pontuacaoTotal += vagaTecnologiaRequisito.Peso;
+            //        }
+            //    }
 
-            return candidatosPontuados.OrderByDescending(cp => cp.Pontuacao).ToList();
+            //    var entidade = _mapper.Map<CandidatoDto>(candidato);
+            //    candidatosPontuados.Add(new CandidatoPontuadoDto
+            //    {
+            //        CandidatoDto = entidade,
+            //        Pontuacao = pontuacaoTotal
+            //    });
+            //}
+
+            //return candidatosPontuados.OrderByDescending(cp => cp.Pontuacao).ToList();
+
+            return null;
         }
     }
 }

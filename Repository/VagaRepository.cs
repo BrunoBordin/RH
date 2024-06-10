@@ -14,10 +14,9 @@ namespace RH.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<Vaga> BuscarVagaTecnologiasPorIdVaga(int idVaga)
+        public async Task<List<VagaTecnologia>> BuscarVagaTecnologiasPorIdVaga(int idVaga)
         {
-            var result = await _dbContext.Vaga.Include(x => x.VagaTecnologias)
-                .FirstOrDefaultAsync(x => x.IdVaga == idVaga);
+            var result = await _dbContext.VagaTecnologia.Where(x => x.IdVaga == idVaga).ToListAsync();
 
             return result;
         }

@@ -1,9 +1,9 @@
 ﻿namespace RH.DTOs
 {
-    public class CandidatoTecnologiaDto
+    public class EmpresaTecnologiaDto
     {
         public int Id { get; set; }
-        public int IdCandidato { get; set; }
+        public int IdEmpresa { get; set; }
         public int IdTecnologia { get; set; }
     }
 }

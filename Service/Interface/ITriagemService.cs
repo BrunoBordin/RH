@@ -4,6 +4,6 @@ namespace RH.Service.Interface
 {
     public interface ITriagemService
     {
-        Task<List<CandidatoPontuadoDto>> GerarRelatorioCandidatosVaga(int idVaga);
+        Task<List<VagaTecnologiaRequisitoDto>> GerarRelatorioCandidatosVaga(int idVaga);
     }
 }

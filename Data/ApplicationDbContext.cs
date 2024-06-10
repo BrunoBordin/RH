@@ -9,50 +9,118 @@ namespace RH.Data
         {
         }
 
-        public DbSet<Tecnologia> Tecnologia { get; set; }
-        public DbSet<Vaga> Vaga { get; set; }
         public DbSet<Candidato> Candidato { get; set; }
         public DbSet<CandidatoTecnologia> CandidatoTecnologia { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<EmpresaTecnologia> EmpresaTecnologia { get; set; }
+        public DbSet<EmpresaVaga> EmpresaVaga { get; set; }
+        public DbSet<Vaga> Vaga { get; set; }
         public DbSet<VagaTecnologia> VagaTecnologia { get; set; }
+        public DbSet<VagaTecnologiaRequisito> VagaTecnologiaRequisito { get; set; }
+        public DbSet<VinculoCanditadoVaga> VinculoCanditadoVaga { get; set; }
+        public DbSet<VinculoCanditadoVagaTecnologia> VinculoCanditadoVagaTecnologia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Candidato>()
-                .HasKey(c => c.IdCandidato);
+            modelBuilder.Entity<Candidato>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
+            });
 
-            modelBuilder.Entity<Tecnologia>()
-                .HasKey(t => t.IdTecnologia);
+            modelBuilder.Entity<CandidatoTecnologia>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Candidato>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdCandidato);
+                entity.HasOne<Tecnologia>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdTecnologia);
+            });
 
-            modelBuilder.Entity<Vaga>()
-                .HasKey(v => v.IdVaga);
+            modelBuilder.Entity<Empresa>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
+            });
 
-            modelBuilder.Entity<CandidatoTecnologia>()
-                .HasKey(ct => new { ct.IdCandidato, ct.IdTecnologia });
+            modelBuilder.Entity<EmpresaTecnologia>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Empresa>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdEmpresa);
+                entity.HasOne<Tecnologia>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdTecnologia);
+            });
 
-            modelBuilder.Entity<CandidatoTecnologia>()
-                .HasOne(ct => ct.Candidato)
-                .WithMany(c => c.CandidatoTecnologias)
-                .HasForeignKey(ct => ct.IdCandidato);
+            modelBuilder.Entity<EmpresaVaga>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Vaga>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdVaga);
+                entity.HasOne<Empresa>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdEmpresa);
+            });
 
-            modelBuilder.Entity<CandidatoTecnologia>()
-                .HasOne(ct => ct.Tecnologia)
-                .WithMany()
-                .HasForeignKey(ct => ct.IdTecnologia);
+            modelBuilder.Entity<Vaga>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Titulo).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Descricao).IsRequired();
+                entity.Property(e => e.Aberta).IsRequired();
+            });
 
-            modelBuilder.Entity<VagaTecnologia>()
-                .HasKey(vt => new { vt.IdVaga, vt.IdTecnologia });
+            modelBuilder.Entity<VagaTecnologia>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Vaga>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdVaga);
+                entity.HasOne<Tecnologia>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdTecnologia);
+            });
 
-            modelBuilder.Entity<VagaTecnologia>()
-                .HasOne(vt => vt.Vaga)
-                .WithMany(v => v.VagaTecnologias)
-                .HasForeignKey(vt => vt.IdVaga);
+            modelBuilder.Entity<VagaTecnologiaRequisito>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Vaga>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdVaga);
+                entity.HasOne<Tecnologia>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdTecnologia);
+                entity.Property(e => e.Peso).IsRequired();
+            });
 
-            modelBuilder.Entity<VagaTecnologia>()
-                .HasOne(vt => vt.Tecnologia)
-                .WithMany()
-                .HasForeignKey(vt => vt.IdTecnologia);
+            modelBuilder.Entity<VinculoCanditadoVaga>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Candidato>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdCandidato);
+                entity.HasOne<Vaga>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdVaga);
+            });
+
+            modelBuilder.Entity<VinculoCanditadoVagaTecnologia>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<VinculoCanditadoVaga>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdVinculoCandidatoVaga);
+                entity.HasOne<Tecnologia>()
+                      .WithMany()
+                      .HasForeignKey(e => e.IdTecnologia);
+            });
         }
     }
 }

@@ -6,6 +6,6 @@ namespace RH.Repository.Interface
     {
         Task DefinirPesos(List<VagaTecnologia> vagaTecnologia);
 
-        Task<Vaga> BuscarVagaTecnologiasPorIdVaga(int idVaga);
+        Task<List<VagaTecnologia>> BuscarVagaTecnologiasPorIdVaga(int idVaga);
     }
 }

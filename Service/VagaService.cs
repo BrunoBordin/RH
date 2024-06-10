@@ -62,8 +62,7 @@ namespace RH.Service
                 var vagaTecnologiaList = tecnologiaPesos.Select(item => new VagaTecnologia
                 {
                     IdVaga = idVaga,
-                    IdTecnologia = item.Key,
-                    Peso = item.Value
+                    IdTecnologia = item.Key
                 }).ToList();
 
                 await _repositoryVaga.DefinirPesos(vagaTecnologiaList);

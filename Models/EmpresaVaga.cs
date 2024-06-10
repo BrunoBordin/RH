@@ -1,9 +1,9 @@
 ﻿namespace RH.Models
 {
-    public class VagaTecnologia
+    public class EmpresaVaga
     {
         public int Id { get; set; }
         public int IdVaga { get; set; }
-        public int IdTecnologia { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }
