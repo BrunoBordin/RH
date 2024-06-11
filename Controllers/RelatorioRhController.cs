@@ -6,13 +6,13 @@ namespace RH.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TriagemController : Controller
+    public class RelatorioRhController : Controller
     {
-        private readonly ITriagemService _triagemService;
+        private readonly IRelatorioRhService _relatorioRhService;
 
-        public TriagemController(ITriagemService triagemService)
+        public RelatorioRhController(IRelatorioRhService relatorioRhService)
         {
-            _triagemService = triagemService;
+            _relatorioRhService = relatorioRhService;
         }
 
         [HttpGet("{idVaga}")]
@@ -21,7 +21,7 @@ namespace RH.Controllers
         {
             try
             {
-                var candidatosParaVaga = await _triagemService.GerarRelatorioCandidatosVaga(idVaga);
+                var candidatosParaVaga = await _relatorioRhService.GerarRelatorioCandidatosVaga(idVaga);
                 if (candidatosParaVaga == null)
                 {
                     return NotFound("Não foram encontrados candidatos qualificados para esta vaga.");

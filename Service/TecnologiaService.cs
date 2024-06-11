@@ -10,11 +10,13 @@ namespace RH.Service
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Tecnologia> _repository;
+        private readonly ITecnologiaRepository _tecnologiaRepository;
 
-        public TecnologiaService(IMapper mapper, IRepository<Tecnologia> repository)
+        public TecnologiaService(IMapper mapper, IRepository<Tecnologia> repository, ITecnologiaRepository tecnologiaRepository)
         {
             _mapper = mapper;
             _repository = repository;
+            _tecnologiaRepository = tecnologiaRepository;
         }
 
         public async Task Atualizar(TecnologiaDto tecnologiaDto, int id)
@@ -49,6 +51,27 @@ namespace RH.Service
         {
             var tecnologia = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Tecnologia não encontrada");
             await _repository.Deletar(tecnologia);
+        }
+
+        public async Task VincularTecnologiaEmpresa(EmpresaTecnologiaDto empresaTecnologiaDto)
+        {
+            var entidade = _mapper.Map<EmpresaTecnologia>(empresaTecnologiaDto);
+
+            await _tecnologiaRepository.VincularTecnologiaEmpresa(entidade);
+        }
+
+        public async Task VincularTecnologiaCandidato(CandidatoTecnologiaDto candidatoTecnologiaDto)
+        {
+            var entidade = _mapper.Map<CandidatoTecnologia>(candidatoTecnologiaDto);
+
+            await _tecnologiaRepository.VincularTecnologiaCandidato(entidade);
+        }
+
+        public async Task VincularTecnologiaVaga(VagaTecnologiaDto vagaTecnologiaDto)
+        {
+            var entidade = _mapper.Map<VagaTecnologia>(vagaTecnologiaDto);
+
+            await _tecnologiaRepository.VincularTecnologiaVaga(entidade);
         }
     }
 }

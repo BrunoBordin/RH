@@ -30,7 +30,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
 
@@ -45,7 +45,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
 
@@ -60,7 +60,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
 
@@ -75,7 +75,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
 
@@ -90,7 +90,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
 
@@ -105,7 +105,52 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("empresa")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularVagaEmpresa([FromBody] List<EmpresaVagaDto> empresaVagaDto)
+        {
+            try
+            {
+                await _vagaService.VincularVagaEmpresa(empresaVagaDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("candidato")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularCandidatoVaga([FromBody] VinculoCanditadoVagaDto vinculoCanditadoVagaDtos)
+        {
+            try
+            {
+                await _vagaService.VincularCandidatoVaga(vinculoCanditadoVagaDtos);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("candidato")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularCanditadoVagaTecnologia([FromBody] VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto)
+        {
+            try
+            {
+                await _vagaService.VincularCanditadoVagaTecnologia(vinculoCanditadoVagaTecnologiaDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
     }

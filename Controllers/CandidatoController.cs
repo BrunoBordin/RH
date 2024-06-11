@@ -16,6 +16,7 @@ namespace RH.Controllers
         }
 
         [HttpGet("porId/{id}")]
+        [ProducesResponseType(typeof(CandidatoDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
             try
@@ -34,6 +35,7 @@ namespace RH.Controllers
         }
 
         [HttpGet("listar")]
+        [ProducesResponseType(typeof(List<CandidatoDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterListaCandidatos()
         {
             try
@@ -48,6 +50,7 @@ namespace RH.Controllers
         }
 
         [HttpPost("cadastrar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Cadastrar([FromBody] CandidatoDto candidatoDto)
         {
             try
@@ -62,6 +65,7 @@ namespace RH.Controllers
         }
 
         [HttpPut("atualizar/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Atualizar([FromBody] CandidatoDto candidatoDto, [FromRoute] int id)
         {
             try
@@ -76,11 +80,11 @@ namespace RH.Controllers
         }
 
         [HttpDelete("deletar/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Deletar([FromRoute] int id)
         {
             try
             {
-
                 await _candidatoService.Deletar(id);
                 return Ok();
             }
@@ -91,6 +95,7 @@ namespace RH.Controllers
         }
 
         [HttpPost("vincular-tecnologia")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> VincularTecnologia(int idCandidato, List<int> idTecnologia)
         {
             try

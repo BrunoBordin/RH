@@ -4,16 +4,14 @@ namespace RH.Service.Interface
 {
     public interface IEmpresaService
     {
-        Task Atualizar(CandidatoDto candidatoDto, int id);
+        Task Atualizar(EmpresaDto candidatoDto, int id);
 
-        Task Cadastrar(CandidatoDto candidatoDto);
+        Task Cadastrar(EmpresaDto candidatoDto);
 
-        Task<IList<CandidatoDto>> ListarTodos();
+        Task<IList<EmpresaDto>> ListarTodos();
 
-        Task<CandidatoDto> BuscarPorId(int id);
+        Task<EmpresaDto> BuscarPorId(int id);
 
         Task Deletar(int id);
-
-        Task VincularCandidatoTecnologia(int idCandidato, List<int> idTecnologia);
     }
 }
