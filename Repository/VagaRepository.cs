@@ -14,9 +14,20 @@ namespace RH.Repository
             _dbContext = dbContext;
         }
 
+        public async Task<VagaTecnologiaRequisito> BuscarVagaTecnologiaPorId(int id)
+        {
+            return await _context.VagaTecnologiaRequisito.FindAsync(id);
+        }
+
         public async Task<List<VagaTecnologiaRequisito>> ListarVagaTecnologiaRequisito()
         {
             return await _context.VagaTecnologiaRequisito.ToListAsync();
+        }
+
+        public async Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisito vagaTecnologiaRequ)
+        {
+            _context.Entry(vagaTecnologiaRequ).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
         public async Task VincularCandidatoVaga(VinculoCanditadoVaga vinculoCanditadoVaga)

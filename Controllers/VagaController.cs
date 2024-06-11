@@ -156,13 +156,28 @@ namespace RH.Controllers
         }
 
         [HttpGet("listarTecnologia/requisito")]
-        [ProducesResponseType(typeof(VagaTecnologiaRequisitoDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<VagaTecnologiaRequisitoDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> ListarVagaTecnologiaRequisito()
         {
             try
             {
                 List<VagaTecnologiaRequisitoDto> aa = await _vagaService.ListarVagaTecnologiaRequisito();
                 return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPut("tecnologia/requisito/peso/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> SetarPesoVagaTecnologiaRequisito([FromBody] VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto, [FromRoute] int id)
+        {
+            try
+            {
+                await _vagaService.SetarPesoVagaTecnologiaRequisito(vagaTecnologiaRequisitoDto, id);
+                return Ok();
             }
             catch (Exception ex)
             {

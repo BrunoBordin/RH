@@ -82,5 +82,12 @@ namespace RH.Service
 
             return entidade.OrderByDescending(x => x.Peso).ToList();
         }
+
+        public async Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagDto, int id)
+        {
+            var vagaTecnologiaRequ = await _repositoryVaga.BuscarVagaTecnologiaPorId(id) ?? throw new KeyNotFoundException("Vaga tecnologia não encontrada.");
+            vagaTecnologiaRequ.Peso = vagDto.Peso;
+            await _repositoryVaga.SetarPesoVagaTecnologiaRequisito(vagaTecnologiaRequ);
+        }
     }
 }
