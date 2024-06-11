@@ -1,11 +1,14 @@
-﻿using RH.DTOs;
-using RH.Models;
+﻿using RH.Models;
 
 namespace RH.Repository.Interface
 {
     public interface IVagaRepository : IRepository<Vaga>
     {
+        Task<VagaTecnologiaRequisito> BuscarVagaTecnologiaPorId(int id);
+
         Task<List<VagaTecnologiaRequisito>> ListarVagaTecnologiaRequisito();
+
+        Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisito vagaTecnologiaRequ);
 
         Task VincularCandidatoVaga(VinculoCanditadoVaga vinculoCanditadoVaga);
 
