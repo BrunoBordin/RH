@@ -23,6 +23,7 @@ namespace RH.Repository
                                 where emp.Id == id
                                 select new TecnologiaEmpresaDto
                                 {
+                                    IdTecnologiaEmpresa = emtec.Id,
                                     IdTecnologia = tec.Id,
                                     IdEmpresa = emp.Id,
                                     NomeTecnologia = tec.Nome,

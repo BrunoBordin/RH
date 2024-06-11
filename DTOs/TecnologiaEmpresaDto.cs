@@ -2,7 +2,7 @@
 {
     public class TecnologiaEmpresaDto
     {
-        public int Id { get; set; }
+        public int IdTecnologiaEmpresa { get; set; }
         public int IdTecnologia { get; set; }
         public int IdEmpresa { get; set; }
         public string NomeTecnologia { get; set; }
