@@ -59,19 +59,5 @@ namespace RH.Service
 
             await _tecnologiaRepository.VincularTecnologiaEmpresa(entidade);
         }
-
-        public async Task VincularTecnologiaCandidato(CandidatoTecnologiaDto candidatoTecnologiaDto)
-        {
-            var entidade = _mapper.Map<CandidatoTecnologia>(candidatoTecnologiaDto);
-
-            await _tecnologiaRepository.VincularTecnologiaCandidato(entidade);
-        }
-
-        public async Task VincularTecnologiaVaga(VagaTecnologiaDto vagaTecnologiaDto)
-        {
-            var entidade = _mapper.Map<VagaTecnologia>(vagaTecnologiaDto);
-
-            await _tecnologiaRepository.VincularTecnologiaVaga(entidade);
-        }
     }
 }

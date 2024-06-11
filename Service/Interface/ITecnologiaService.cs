@@ -15,9 +15,5 @@ namespace RH.Service.Interface
         Task Deletar(int id);
 
         Task VincularTecnologiaEmpresa(EmpresaTecnologiaDto empresaTecnologiaDto);
-
-        Task VincularTecnologiaCandidato(CandidatoTecnologiaDto candidatoTecnologiaDto);
-
-        Task VincularTecnologiaVaga(VagaTecnologiaDto vagaTecnologiaDto);
     }
 }

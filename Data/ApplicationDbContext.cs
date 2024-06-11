@@ -10,12 +10,9 @@ namespace RH.Data
         }
 
         public DbSet<Candidato> Candidato { get; set; }
-        public DbSet<CandidatoTecnologia> CandidatoTecnologia { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<EmpresaTecnologia> EmpresaTecnologia { get; set; }
-        public DbSet<EmpresaVaga> EmpresaVaga { get; set; }
         public DbSet<Vaga> Vaga { get; set; }
-        public DbSet<VagaTecnologia> VagaTecnologia { get; set; }
         public DbSet<VagaTecnologiaRequisito> VagaTecnologiaRequisito { get; set; }
         public DbSet<VinculoCanditadoVaga> VinculoCanditadoVaga { get; set; }
         public DbSet<VinculoCanditadoVagaTecnologia> VinculoCanditadoVagaTecnologia { get; set; }
@@ -28,17 +25,6 @@ namespace RH.Data
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<CandidatoTecnologia>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasOne<Candidato>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdCandidato);
-                entity.HasOne<Tecnologia>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdTecnologia);
             });
 
             modelBuilder.Entity<Empresa>(entity =>
@@ -58,34 +44,12 @@ namespace RH.Data
                       .HasForeignKey(e => e.IdTecnologia);
             });
 
-            modelBuilder.Entity<EmpresaVaga>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasOne<Vaga>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdVaga);
-                entity.HasOne<Empresa>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdEmpresa);
-            });
-
             modelBuilder.Entity<Vaga>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Titulo).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Descricao).IsRequired();
                 entity.Property(e => e.Aberta).IsRequired();
-            });
-
-            modelBuilder.Entity<VagaTecnologia>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasOne<Vaga>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdVaga);
-                entity.HasOne<Tecnologia>()
-                      .WithMany()
-                      .HasForeignKey(e => e.IdTecnologia);
             });
 
             modelBuilder.Entity<VagaTecnologiaRequisito>(entity =>
