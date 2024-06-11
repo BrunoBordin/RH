@@ -27,7 +27,7 @@ namespace RH.Repository
                                 join v in _dbContext.Vaga on vtr.IdVaga equals v.Id
                                 select new VagaTecnologiaPesoDto
                                 {
-                                    IdVagaTecnologiaRequisitoDto = vtr.Id,
+                                    IdVagaTecnologiaRequisito = vtr.Id,
                                     Peso = vtr.Peso,
                                     NomeTecnologia = t.Nome,
                                     NomeVaga = v.Titulo
