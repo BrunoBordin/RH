@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RH.Data;
+using RH.DTOs;
 using RH.Models;
 using RH.Repository.Interface;
 
@@ -19,9 +20,20 @@ namespace RH.Repository
             return await _context.VagaTecnologiaRequisito.FindAsync(id);
         }
 
-        public async Task<List<VagaTecnologiaRequisito>> ListarVagaTecnologiaRequisito()
+        public async Task<List<VagaTecnologiaPesoDto>> ListarVagaTecnologiaRequisito()
         {
-            return await _context.VagaTecnologiaRequisito.ToListAsync();
+            var result = await (from vtr in _dbContext.VagaTecnologiaRequisito
+                                join t in _dbContext.Tecnologia on vtr.IdTecnologia equals t.Id
+                                join v in _dbContext.Vaga on vtr.IdVaga equals v.Id
+                                select new VagaTecnologiaPesoDto
+                                {
+                                    IdVagaTecnologiaRequisitoDto = vtr.Id,
+                                    Peso = vtr.Peso,
+                                    NomeTecnologia = t.Nome,
+                                    NomeVaga = v.Titulo
+                                }).ToListAsync();
+
+            return result;
         }
 
         public async Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisito vagaTecnologiaRequ)

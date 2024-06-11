@@ -74,11 +74,11 @@ namespace RH.Service
             await _repositoryVaga.VincularVagaTecnologiaRequisito(entidade);
         }
 
-        public async Task<List<VagaTecnologiaRequisitoDto>> ListarVagaTecnologiaRequisito()
+        public async Task<List<VagaTecnologiaPesoDto>> ListarVagaTecnologiaRequisito()
         {
             var lista = await _repositoryVaga.ListarVagaTecnologiaRequisito();
 
-            var entidade = _mapper.Map<List<VagaTecnologiaRequisitoDto>>(lista);
+            var entidade = _mapper.Map<List<VagaTecnologiaPesoDto>>(lista);
 
             return entidade.OrderByDescending(x => x.Peso).ToList();
         }

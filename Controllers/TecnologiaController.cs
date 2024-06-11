@@ -111,12 +111,12 @@ namespace RH.Controllers
         }
 
         [HttpGet("porEmpresa/{id}")]
-        [ProducesResponseType(typeof(EmpresaTecnologiaDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TecnologiaEmpresaDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterListaTecnologiasPorEmpresa([FromRoute] int id)
         {
             try
             {
-                List<EmpresaTecnologiaDto> list = await _service.ListarTecnologiasPorEmpresa(id);
+                List<TecnologiaEmpresaDto> list = await _service.ListarTecnologiasPorEmpresa(id);
                 return Ok(list);
             }
             catch (Exception ex)

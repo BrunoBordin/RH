@@ -10,6 +10,7 @@ namespace RH.Data
         }
 
         public DbSet<Candidato> Candidato { get; set; }
+        public DbSet<Tecnologia> Tecnologia { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<EmpresaTecnologia> EmpresaTecnologia { get; set; }
         public DbSet<Vaga> Vaga { get; set; }
@@ -22,6 +23,12 @@ namespace RH.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Candidato>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Tecnologia>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Nome).IsRequired().HasMaxLength(100);

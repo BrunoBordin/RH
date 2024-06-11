@@ -15,6 +15,6 @@ namespace RH.Service.Interface
         Task Deletar(int id);
 
         Task VincularTecnologiaEmpresa(EmpresaTecnologiaDto empresaTecnologiaDto);
-        Task<List<EmpresaTecnologiaDto>> ListarTecnologiasPorEmpresa(int id);
+        Task<List<TecnologiaEmpresaDto>> ListarTecnologiasPorEmpresa(int id);
     }
 }

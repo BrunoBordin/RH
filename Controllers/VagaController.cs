@@ -161,7 +161,7 @@ namespace RH.Controllers
         {
             try
             {
-                List<VagaTecnologiaRequisitoDto> aa = await _vagaService.ListarVagaTecnologiaRequisito();
+                List<VagaTecnologiaPesoDto> aa = await _vagaService.ListarVagaTecnologiaRequisito();
                 return Ok(aa);
             }
             catch (Exception ex)

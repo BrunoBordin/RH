@@ -20,7 +20,7 @@ namespace RH.Service.Interface
 
         Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto);
 
-        Task<List<VagaTecnologiaRequisitoDto>> ListarVagaTecnologiaRequisito();
+        Task<List<VagaTecnologiaPesoDto>> ListarVagaTecnologiaRequisito();
 
         Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto, int id);
     }

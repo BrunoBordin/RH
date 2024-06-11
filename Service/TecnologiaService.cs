@@ -60,11 +60,11 @@ namespace RH.Service
             await _tecnologiaRepository.VincularTecnologiaEmpresa(entidade);
         }
 
-        public async Task<List<EmpresaTecnologiaDto>> ListarTecnologiasPorEmpresa(int id)
+        public async Task<List<TecnologiaEmpresaDto>> ListarTecnologiasPorEmpresa(int id)
         {
-            List<EmpresaTecnologia> list = await _tecnologiaRepository.ListarTodosPorEmpresa(id);
+            var list = await _tecnologiaRepository.ListarTodosPorEmpresa(id);
 
-            return _mapper.Map<List<EmpresaTecnologiaDto>>(list);
+            return list;
         }
     }
 }

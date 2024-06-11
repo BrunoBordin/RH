@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RH.Data;
+using RH.DTOs;
 using RH.Models;
 using RH.Repository.Interface;
 
@@ -14,9 +15,21 @@ namespace RH.Repository
             _dbContext = context;
         }
 
-        public async Task<List<EmpresaTecnologia>> ListarTodosPorEmpresa(int id)
+        public async Task<List<TecnologiaEmpresaDto>> ListarTodosPorEmpresa(int id)
         {
-            return await _dbContext.EmpresaTecnologia.ToListAsync();
+            var result = await (from emtec in _dbContext.EmpresaTecnologia
+                                join tec in _dbContext.Tecnologia on emtec.IdTecnologia equals tec.Id
+                                join emp in _dbContext.Empresa on emtec.IdEmpresa equals emp.Id
+                                where emp.Id == id
+                                select new TecnologiaEmpresaDto
+                                {
+                                    IdTecnologia = tec.Id,
+                                    IdEmpresa = emp.Id,
+                                    NomeTecnologia = tec.Nome,
+                                    NomeEmpresa = emp.Nome
+                                }).ToListAsync();
+
+            return result;
         }
 
         public async Task VincularTecnologiaEmpresa(EmpresaTecnologia entidade)

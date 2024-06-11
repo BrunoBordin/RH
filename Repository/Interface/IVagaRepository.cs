@@ -1,4 +1,5 @@
-﻿using RH.Models;
+﻿using RH.DTOs;
+using RH.Models;
 
 namespace RH.Repository.Interface
 {
@@ -6,7 +7,7 @@ namespace RH.Repository.Interface
     {
         Task<VagaTecnologiaRequisito> BuscarVagaTecnologiaPorId(int id);
 
-        Task<List<VagaTecnologiaRequisito>> ListarVagaTecnologiaRequisito();
+        Task<List<VagaTecnologiaPesoDto>> ListarVagaTecnologiaRequisito();
 
         Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisito vagaTecnologiaRequ);
 
