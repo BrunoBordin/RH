@@ -11,19 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()));
 
 //repositorios
 builder.Services.AddScoped<ICandidatoRepository, CandidatoRepository>();
 builder.Services.AddScoped<ITecnologiaRepository, TecnologiaRepository>();
 builder.Services.AddScoped<IVagaRepository, VagaRepository>();
+builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
 
 //serviços
 builder.Services.AddScoped<ICandidatoService, CandidatoService>();
+builder.Services.AddScoped<IEmpresaService, EmpresaService>();
 builder.Services.AddScoped<ITecnologiaService, TecnologiaService>();
 builder.Services.AddScoped<IVagaService, VagaService>();
-builder.Services.AddScoped<IRelatorioRhService, TriagemService>();
+builder.Services.AddScoped<IRelatorioService, RelatorioService>();
 
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 

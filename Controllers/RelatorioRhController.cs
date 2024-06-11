@@ -8,20 +8,20 @@ namespace RH.Controllers
     [Route("[controller]")]
     public class RelatorioRhController : Controller
     {
-        private readonly IRelatorioRhService _relatorioRhService;
+        private readonly IRelatorioService _relatorioService;
 
-        public RelatorioRhController(IRelatorioRhService relatorioRhService)
+        public RelatorioRhController(IRelatorioService relatorioService)
         {
-            _relatorioRhService = relatorioRhService;
+            _relatorioService = relatorioService;
         }
 
         [HttpGet("{idVaga}")]
-        [ProducesResponseType(typeof(List<VagaTecnologiaRequisitoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<RelatorioCandidatosDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GerarRelatorio([FromRoute] int idVaga)
         {
             try
             {
-                var candidatosParaVaga = await _relatorioRhService.GerarRelatorioCandidatosVaga(idVaga);
+                List<RelatorioCandidatosDto> candidatosParaVaga = await _relatorioService.GerarRelatorioCandidatosVaga(idVaga);
                 if (candidatosParaVaga == null)
                 {
                     return NotFound("Não foram encontrados candidatos qualificados para esta vaga.");
@@ -30,7 +30,7 @@ namespace RH.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
             }
         }
     }
