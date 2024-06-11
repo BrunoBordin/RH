@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RH", "RH.csproj", "{FFF52086-9D1B-49E1-B4FE-5D0C3CC31AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RH", "RH.csproj", "{FFF52086-9D1B-49E1-B4FE-5D0C3CC31AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHTest", "..\RHTest\RHTest.csproj", "{D7FD6698-E5AB-444B-81CA-84DA717CDCBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FFF52086-9D1B-49E1-B4FE-5D0C3CC31AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF52086-9D1B-49E1-B4FE-5D0C3CC31AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFF52086-9D1B-49E1-B4FE-5D0C3CC31AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FD6698-E5AB-444B-81CA-84DA717CDCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FD6698-E5AB-444B-81CA-84DA717CDCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FD6698-E5AB-444B-81CA-84DA717CDCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FD6698-E5AB-444B-81CA-84DA717CDCBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
