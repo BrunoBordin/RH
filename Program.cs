@@ -23,7 +23,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped<ICandidatoService, CandidatoService>();
 builder.Services.AddScoped<ITecnologiaService, TecnologiaService>();
 builder.Services.AddScoped<IVagaService, VagaService>();
-builder.Services.AddScoped<ITriagemService, TriagemService>();
+builder.Services.AddScoped<IRelatorioRhService, TriagemService>();
 
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 

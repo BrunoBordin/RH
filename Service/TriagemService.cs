@@ -5,7 +5,7 @@ using RH.Service.Interface;
 
 namespace RH.Service
 {
-    public class TriagemService : ITriagemService
+    public class TriagemService : IRelatorioRhService
     {
         private readonly IMapper _mapper;
         private readonly IVagaRepository _repositoryVaga;
@@ -20,37 +20,33 @@ namespace RH.Service
 
         public async Task<List<VagaTecnologiaRequisitoDto>> GerarRelatorioCandidatosVaga(int idVaga)
         {
-            //var vaga = await _repositoryVaga.BuscarVagaTecnologiasPorIdVaga(idVaga);
+            var vaga = await _repositoryVaga.BuscarVagaTecnologiasPorIdVaga(idVaga);
 
-            //var candidatos = await _repositoryCandidato.BuscarCandidatosPorIdVaga(idVaga);
+            var candidatos = await _repositoryCandidato.BuscarCandidatosPorIdVaga(idVaga);
 
-            //var candidatosPontuados = new List<CandidatoPontuadoDto>();
+            var candidatosPontuados = new List<VagaTecnologiaRequisitoDto>();
 
-            //foreach (var candidato in candidatos)
-            //{
-            //    int pontuacaoTotal = 0;
+            foreach (var candidato in candidatos)
+            {
+                int pontuacaoTotal = 0;
 
-            //    foreach (var ct in candidato.CandidatoTecnologias)
-            //    {
-            //        var vagaTecnologiaRequisito = vaga.VagaTecnologiaRequisitos
-            //                                          .FirstOrDefault(vtr => vtr.IdTecnologia == ct.IdTecnologia);
-            //        if (vagaTecnologiaRequisito != null)
-            //        {
-            //            pontuacaoTotal += vagaTecnologiaRequisito.Peso;
-            //        }
-            //    }
+                foreach (var ct in candidato)
+                {
+                    var vagaTecnologia = vaga.FirstOrDefault(vt => vt.IdTecnologia == ct.IdTecnologia);
+                    if (vagaTecnologia != null)
+                    {
+                        pontuacaoTotal += vagaTecnologia.Peso;
+                    }
+                }
+                var entidade = _mapper.Map<CandidatoDto>(candidato);
+                candidatosPontuados.Add(new CandidatoPontuadoDto
+                {
+                    CandidatoDto = entidade,
+                    Pontuacao = pontuacaoTotal
+                });
+            }
 
-            //    var entidade = _mapper.Map<CandidatoDto>(candidato);
-            //    candidatosPontuados.Add(new CandidatoPontuadoDto
-            //    {
-            //        CandidatoDto = entidade,
-            //        Pontuacao = pontuacaoTotal
-            //    });
-            //}
-
-            //return candidatosPontuados.OrderByDescending(cp => cp.Pontuacao).ToList();
-
-            return null;
+            return candidatosPontuados.OrderByDescending(cp => cp.Peso).ToList();
         }
     }
 }

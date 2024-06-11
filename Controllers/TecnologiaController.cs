@@ -16,6 +16,7 @@ namespace RH.Controllers
         }
 
         [HttpGet("porId/{id}")]
+        [ProducesResponseType(typeof(TecnologiaDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterPorId([FromRoute] int id)
         {
             try
@@ -34,6 +35,7 @@ namespace RH.Controllers
         }
 
         [HttpGet("listar")]
+        [ProducesResponseType(typeof(TecnologiaDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterListaTecnologias()
         {
             try
@@ -48,6 +50,8 @@ namespace RH.Controllers
         }
 
         [HttpPost("cadastrar")]
+        [ProducesResponseType(typeof(TecnologiaDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Cadastrar([FromBody] TecnologiaDto tecnologiaDto)
         {
             try
@@ -62,6 +66,7 @@ namespace RH.Controllers
         }
 
         [HttpPut("atualizar/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Atualizar([FromBody] TecnologiaDto tecnologiaDto, [FromRoute] int id)
         {
             try
@@ -76,12 +81,57 @@ namespace RH.Controllers
         }
 
         [HttpDelete("deletar/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Deletar([FromRoute] int id)
         {
             try
             {
-                
                 await _service.Deletar(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("empresa")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularTecnologiaEmpresa([FromBody] EmpresaTecnologiaDto empresaTecnologiaDto)
+        {
+            try
+            {
+                await _service.VincularTecnologiaEmpresa(empresaTecnologiaDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("candidato")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularTecnologiaCandidato([FromBody] CandidatoTecnologiaDto candidatoTecnologiaDto)
+        {
+            try
+            {
+                await _service.VincularTecnologiaCandidato(candidatoTecnologiaDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("vaga")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularTecnologiaVaga([FromBody] VagaTecnologiaDto vagaTecnologiaDto)
+        {
+            try
+            {
+                await _service.VincularTecnologiaVaga(vagaTecnologiaDto);
                 return Ok();
             }
             catch (Exception ex)

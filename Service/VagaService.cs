@@ -72,5 +72,24 @@ namespace RH.Service
                 throw;
             }
         }
+
+        public async Task VincularVagaEmpresa(List<EmpresaVagaDto> empresaVagaDto)
+        {
+            var entidade = _mapper.Map<List<EmpresaVaga>>(empresaVagaDto);
+            await _repositoryVaga.VincularVagaEmpresa(entidade);
+        }
+
+        public async Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDto)
+        {
+            var entidade = _mapper.Map<VinculoCanditadoVaga>(vinculoCanditadoVagaDto);
+
+            await _repositoryVaga.VincularCandidatoVaga(entidade);
+        }
+
+        public async Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto)
+        {
+            var entidade = _mapper.Map<VinculoCanditadoVagaTecnologia>(vinculoCanditadoVagaTecnologiaDto);
+            await _repositoryVaga.VincularCanditadoVagaTecnologia(entidade);
+        }
     }
 }

@@ -13,5 +13,11 @@ namespace RH.Service.Interface
         Task<TecnologiaDto> BuscarPorId(int id);
 
         Task Deletar(int id);
+
+        Task VincularTecnologiaEmpresa(EmpresaTecnologiaDto empresaTecnologiaDto);
+
+        Task VincularTecnologiaCandidato(CandidatoTecnologiaDto candidatoTecnologiaDto);
+
+        Task VincularTecnologiaVaga(VagaTecnologiaDto vagaTecnologiaDto);
     }
 }

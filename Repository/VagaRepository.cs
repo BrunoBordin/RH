@@ -21,9 +21,27 @@ namespace RH.Repository
             return result;
         }
 
+        public async Task VincularCandidatoVaga(VinculoCanditadoVaga vinculoCanditadoVaga)
+        {
+            await _dbContext.VinculoCanditadoVaga.AddAsync(vinculoCanditadoVaga);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task VincularVagaEmpresa(List<EmpresaVaga> empresaVaga)
+        {
+            await _dbContext.EmpresaVaga.AddRangeAsync(empresaVaga);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task DefinirPesos(List<VagaTecnologia> vagaTecnologiaList)
         {
             await _dbContext.VagaTecnologia.AddRangeAsync(vagaTecnologiaList);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologia vinculoCanditadoVagaTecnologia)
+        {
+            await _dbContext.VinculoCanditadoVagaTecnologia.AddAsync(vinculoCanditadoVagaTecnologia);
             await _dbContext.SaveChangesAsync();
         }
     }
