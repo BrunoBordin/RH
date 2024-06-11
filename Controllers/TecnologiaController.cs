@@ -109,5 +109,20 @@ namespace RH.Controllers
                 return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
             }
         }
+
+        [HttpGet("porEmpresa/{id}")]
+        [ProducesResponseType(typeof(EmpresaTecnologiaDto), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterListaTecnologiasPorEmpresa([FromRoute] int id)
+        {
+            try
+            {
+                List<EmpresaTecnologiaDto> list = await _service.ListarTecnologiasPorEmpresa(id);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
     }
 }
