@@ -67,5 +67,20 @@ namespace RH.Service
             var entidade = _mapper.Map<VinculoCanditadoVagaTecnologia>(vinculoCanditadoVagaTecnologiaDto);
             await _repositoryVaga.VincularCanditadoVagaTecnologia(entidade);
         }
+
+        public async Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto)
+        {
+            var entidade = _mapper.Map<VagaTecnologiaRequisito>(vagaTecnologiaRequisitoDto);
+            await _repositoryVaga.VincularVagaTecnologiaRequisito(entidade);
+        }
+
+        public async Task<List<VagaTecnologiaRequisitoDto>> ListarVagaTecnologiaRequisito()
+        {
+            var lista = await _repositoryVaga.ListarVagaTecnologiaRequisito();
+
+            var entidade = _mapper.Map<List<VagaTecnologiaRequisitoDto>>(lista);
+
+            return entidade.OrderByDescending(x => x.Peso).ToList();
+        }
     }
 }
