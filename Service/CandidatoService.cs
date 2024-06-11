@@ -55,16 +55,5 @@ namespace RH.Service
             var entidade = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Candidato não encontrado");
             await _repository.Deletar(entidade);
         }
-
-        public async Task VincularCandidatoTecnologia(int idCandidato, List<int> idsTecnologia)
-        {
-            var candidatoTecnologias = idsTecnologia.Select(idTecnologia => new CandidatoTecnologia
-            {
-                IdCandidato = idCandidato,
-                IdTecnologia = idTecnologia
-            }).ToList();
-
-            await _candidatoRepository.VincularCandidatoTecnologia(candidatoTecnologias);
-        }
     }
 }

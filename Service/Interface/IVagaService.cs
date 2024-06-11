@@ -14,11 +14,8 @@ namespace RH.Service.Interface
 
         Task Deletar(int id);
 
-        Task DefinirPesos(int idVaga, Dictionary<int, int> tecnologiaPesos);
-
-        Task VincularVagaEmpresa(List<EmpresaVagaDto> empresaVagaDto);
-
         Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDtos);
+
         Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto);
     }
 }

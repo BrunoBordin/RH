@@ -93,27 +93,5 @@ namespace RH.Controllers
                 return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
             }
         }
-
-        [HttpPost("vincular-tecnologia")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularTecnologia(int idCandidato, List<int> idTecnologia)
-        {
-            try
-            {
-                var candidato = await _candidatoService.BuscarPorId(idCandidato);
-
-                if (candidato == null)
-                {
-                    return NotFound(new { Message = "Candidato não encontrado para vincular as tecnologias." });
-                }
-
-                await _candidatoService.VincularCandidatoTecnologia(idCandidato, idTecnologia);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
     }
 }

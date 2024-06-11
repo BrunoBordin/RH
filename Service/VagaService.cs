@@ -55,30 +55,6 @@ namespace RH.Service
             await _repository.Deletar(entidade);
         }
 
-        public async Task DefinirPesos(int idVaga, Dictionary<int, int> tecnologiaPesos)
-        {
-            try
-            {
-                var vagaTecnologiaList = tecnologiaPesos.Select(item => new VagaTecnologia
-                {
-                    IdVaga = idVaga,
-                    IdTecnologia = item.Key
-                }).ToList();
-
-                await _repositoryVaga.DefinirPesos(vagaTecnologiaList);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task VincularVagaEmpresa(List<EmpresaVagaDto> empresaVagaDto)
-        {
-            var entidade = _mapper.Map<List<EmpresaVaga>>(empresaVagaDto);
-            await _repositoryVaga.VincularVagaEmpresa(entidade);
-        }
-
         public async Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDto)
         {
             var entidade = _mapper.Map<VinculoCanditadoVaga>(vinculoCanditadoVagaDto);

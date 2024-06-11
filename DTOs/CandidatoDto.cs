@@ -1,6 +1,4 @@
-﻿using RH.Models;
-
-namespace RH.DTOs
+﻿namespace RH.DTOs
 {
     public class CandidatoDto
     {

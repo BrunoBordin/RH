@@ -98,30 +98,16 @@ namespace RH.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DefinirPesos(int idVaga, Dictionary<int, int> tecnologiaPesos)
         {
-            try
-            {
-                await _vagaService.DefinirPesos(idVaga, tecnologiaPesos);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
-
-        [HttpPost("empresa")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularVagaEmpresa([FromBody] List<EmpresaVagaDto> empresaVagaDto)
-        {
-            try
-            {
-                await _vagaService.VincularVagaEmpresa(empresaVagaDto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
-            }
+            //try
+            //{
+            //    await _vagaService.DefinirPesos(idVaga, tecnologiaPesos);
+            //    return Ok();
+            //}
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            //}
+            return Ok();
         }
 
         [HttpPost("candidato")]

@@ -109,35 +109,5 @@ namespace RH.Controllers
                 return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
             }
         }
-
-        [HttpPost("candidato")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularTecnologiaCandidato([FromBody] CandidatoTecnologiaDto candidatoTecnologiaDto)
-        {
-            try
-            {
-                await _service.VincularTecnologiaCandidato(candidatoTecnologiaDto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
-
-        [HttpPost("vaga")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularTecnologiaVaga([FromBody] VagaTecnologiaDto vagaTecnologiaDto)
-        {
-            try
-            {
-                await _service.VincularTecnologiaVaga(vagaTecnologiaDto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
     }
 }
