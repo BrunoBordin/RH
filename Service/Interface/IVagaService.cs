@@ -17,5 +17,9 @@ namespace RH.Service.Interface
         Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDtos);
 
         Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto);
+
+        Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto);
+
+        Task<List<VagaTecnologiaRequisitoDto>> ListarVagaTecnologiaRequisito();
     }
 }

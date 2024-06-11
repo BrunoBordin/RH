@@ -125,7 +125,7 @@ namespace RH.Controllers
             }
         }
 
-        [HttpPost("candidato")]
+        [HttpPost("tecnologia/candidato")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> VincularCanditadoVagaTecnologia([FromBody] VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto)
         {
@@ -133,6 +133,36 @@ namespace RH.Controllers
             {
                 await _vagaService.VincularCanditadoVagaTecnologia(vinculoCanditadoVagaTecnologiaDto);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("tecnologia/requisito")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> VincularVagaTecnologiaRequisito([FromBody] VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto)
+        {
+            try
+            {
+                await _vagaService.VincularVagaTecnologiaRequisito(vagaTecnologiaRequisitoDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
+
+        [HttpGet("listarTecnologia/requisito")]
+        [ProducesResponseType(typeof(VagaTecnologiaRequisitoDto), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ListarVagaTecnologiaRequisito()
+        {
+            try
+            {
+                List<VagaTecnologiaRequisitoDto> aa = await _vagaService.ListarVagaTecnologiaRequisito();
+                return Ok(aa);
             }
             catch (Exception ex)
             {
