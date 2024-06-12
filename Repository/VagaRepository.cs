@@ -51,7 +51,7 @@ namespace RH.Repository
             };
             await _dbContext.VinculoCanditadoVaga.AddAsync(entidade);
 
-             await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             await VincularCanditadoVagaTecnologia(entidade.Id, listaTecnologias);
         }
