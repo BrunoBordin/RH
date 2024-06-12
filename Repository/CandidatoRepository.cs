@@ -1,4 +1,7 @@
-﻿using RH.Data;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using RH.Data;
+using RH.DTOs;
 using RH.Models;
 using RH.Repository.Interface;
 
@@ -13,16 +16,30 @@ namespace RH.Repository
             _dbContext = context;
         }
 
-        public async Task<List<Candidato>> BuscarCandidatosPorIdVaga(int idVaga)
+        public async Task<List<EntrevistaCandidatoDTO>> ListaEntrevistas()
         {
-            // var candidatos = await _dbContext.Candidato
+            var entrevistaVaga = (from v in _dbContext.VinculoCanditadoVaga
+                                  join can in _dbContext.Candidato on v.IdCandidato equals can.Id
+                                  join va in _dbContext.Vaga on v.IdVaga equals va.Id
+                                  select new EntrevistaCandidatoDTO()
+                                  {
+                                      Candidato = can.Nome,
+                                      Vaga = va.Descricao,
+                                      IdVaga = v.Id
+                                  }).ToList();
 
-            //.Where(c => c.IdVaga == idVaga)
-            //.Include(c => c.CandidatoTecnologias)
-            //.ThenInclude(ct => ct.Tecnologia)
-            //.ToListAsync();
 
-            return null;
+            foreach (var item in entrevistaVaga)
+            {
+                var tec = (from t in _dbContext.VinculoCanditadoVagaTecnologia
+                           join te in _dbContext.Tecnologia on t.IdTecnologia equals te.Id
+                           where t.IdVinculoCandidatoVaga == item.IdVaga
+                           select te.Nome).ToList();
+
+                item.Tecnologias = string.Join(", ", tec);
+            }
+
+            return entrevistaVaga;
         }
     }
 }

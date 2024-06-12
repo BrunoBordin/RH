@@ -1,9 +1,10 @@
-﻿using RH.Models;
+﻿using RH.DTOs;
+using RH.Models;
 
 namespace RH.Repository.Interface
 {
     public interface ICandidatoRepository : IRepository<Candidato>
     {
-        Task<List<Candidato>> BuscarCandidatosPorIdVaga(int idVaga);
+        Task<List<EntrevistaCandidatoDTO>> ListaEntrevistas();
     }
 }

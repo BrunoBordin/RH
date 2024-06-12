@@ -13,5 +13,6 @@ namespace RH.Service.Interface
         Task<CandidatoDto> BuscarPorId(int id);
 
         Task Deletar(int id);
+        Task<IList<EntrevistaCandidatoDTO>> ObterListaEntrevistas();
     }
 }

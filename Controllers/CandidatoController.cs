@@ -93,5 +93,20 @@ namespace RH.Controllers
                 return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
             }
         }
+
+        [HttpGet("entrevista")]
+        [ProducesResponseType(typeof(List<EntrevistaCandidatoDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterListaEntrevistas()
+        {
+            try
+            {
+                var list = await _candidatoService.ObterListaEntrevistas();
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Erro. COnsulte o time de desenvolvimento", Details = ex.Message });
+            }
+        }
     }
 }

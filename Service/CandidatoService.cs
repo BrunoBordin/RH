@@ -55,5 +55,12 @@ namespace RH.Service
             var entidade = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Candidato não encontrado");
             await _repository.Deletar(entidade);
         }
+
+        public async Task<IList<EntrevistaCandidatoDTO>> ObterListaEntrevistas()
+        {
+            var resultList = await _candidatoRepository.ListaEntrevistas();
+
+            return _mapper.Map<IList<EntrevistaCandidatoDTO>>(resultList);
+        }
     }
 }
