@@ -55,17 +55,9 @@ namespace RH.Service
             await _repository.Deletar(entidade);
         }
 
-        public async Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDto)
+        public async Task VincularCandidatoVaga(int idCandidato, int idVaga, List<int> listaTecnologias)
         {
-            var entidade = _mapper.Map<VinculoCanditadoVaga>(vinculoCanditadoVagaDto);
-
-            await _repositoryVaga.VincularCandidatoVaga(entidade);
-        }
-
-        public async Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto)
-        {
-            var entidade = _mapper.Map<VinculoCanditadoVagaTecnologia>(vinculoCanditadoVagaTecnologiaDto);
-            await _repositoryVaga.VincularCanditadoVagaTecnologia(entidade);
+            await _repositoryVaga.VincularCandidatoVaga(idCandidato, idVaga, listaTecnologias);
         }
 
         public async Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto)

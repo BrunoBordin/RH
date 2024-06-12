@@ -110,43 +110,13 @@ namespace RH.Controllers
             return Ok();
         }
 
-        [HttpPost("candidato")]
+        [HttpPost("candidato/{idCandidato}/{idVaga}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularCandidatoVaga([FromBody] VinculoCanditadoVagaDto vinculoCanditadoVagaDtos)
+        public async Task<IActionResult> VincularCandidatoVaga([FromRoute] int idCandidato, int idVaga, [FromBody] List<int> listaTecnologias)
         {
             try
             {
-                await _vagaService.VincularCandidatoVaga(vinculoCanditadoVagaDtos);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
-
-        [HttpPost("tecnologia/candidato")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularCanditadoVagaTecnologia([FromBody] VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto)
-        {
-            try
-            {
-                await _vagaService.VincularCanditadoVagaTecnologia(vinculoCanditadoVagaTecnologiaDto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "Erro. Consulte o time de desenvolvimento", Details = ex.Message });
-            }
-        }
-
-        [HttpPost("tecnologia/requisito")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> VincularVagaTecnologiaRequisito([FromBody] VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto)
-        {
-            try
-            {
-                await _vagaService.VincularVagaTecnologiaRequisito(vagaTecnologiaRequisitoDto);
+                await _vagaService.VincularCandidatoVaga(idCandidato, idVaga, listaTecnologias);
                 return Ok();
             }
             catch (Exception ex)

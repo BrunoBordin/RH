@@ -14,11 +14,7 @@ namespace RH.Service.Interface
 
         Task Deletar(int id);
 
-        Task VincularCandidatoVaga(VinculoCanditadoVagaDto vinculoCanditadoVagaDtos);
-
-        Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologiaDto vinculoCanditadoVagaTecnologiaDto);
-
-        Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisitoDto vagaTecnologiaRequisitoDto);
+        Task VincularCandidatoVaga(int idCandidato, int idVaga, List<int> listaTecnologias);
 
         Task<List<VagaTecnologiaPesoDto>> ListarVagaTecnologiaRequisito();
 

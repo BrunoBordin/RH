@@ -12,6 +12,13 @@ namespace RH.Service
         protected readonly IRepository<Empresa> _repository;
         private readonly IEmpresaRepository _empresaRepository;
 
+        public EmpresaService(IMapper mapper, IEmpresaRepository empresaRepository, IRepository<Empresa> repository)
+        {
+            _mapper = mapper;
+            _empresaRepository = empresaRepository;
+            _repository = repository;
+        }
+
         public async Task Atualizar(EmpresaDto empresaDto, int id)
         {
             var entidade = await _repository.BuscarPorId(id) ?? throw new KeyNotFoundException("Empresa nao encontrada.");

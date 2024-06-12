@@ -42,16 +42,34 @@ namespace RH.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task VincularCandidatoVaga(VinculoCanditadoVaga vinculoCanditadoVaga)
+        public async Task VincularCandidatoVaga(int idCandidato, int idVaga, List<int> listaTecnologias)
         {
-            await _dbContext.VinculoCanditadoVaga.AddAsync(vinculoCanditadoVaga);
-            await _dbContext.SaveChangesAsync();
+            var entidade = new VinculoCanditadoVaga()
+            {
+                IdCandidato = idCandidato,
+                IdVaga = idVaga,
+            };
+            await _dbContext.VinculoCanditadoVaga.AddAsync(entidade);
+
+             await _dbContext.SaveChangesAsync();
+
+            await VincularCanditadoVagaTecnologia(entidade.Id, listaTecnologias);
         }
 
-        public async Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologia vinculoCanditadoVagaTecnologia)
+        private async Task VincularCanditadoVagaTecnologia(int idVinculoCandidatoVaga, List<int> listaTecnologias)
         {
-            await _dbContext.VinculoCanditadoVagaTecnologia.AddAsync(vinculoCanditadoVagaTecnologia);
-            await _dbContext.SaveChangesAsync();
+
+            foreach (var item in listaTecnologias)
+            {
+                var vinculo = new VinculoCanditadoVagaTecnologia()
+                {
+                    IdVinculoCandidatoVaga = idVinculoCandidatoVaga,
+                    IdTecnologia = item
+                };
+
+                await _dbContext.VinculoCanditadoVagaTecnologia.AddAsync(vinculo);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisito entidade)

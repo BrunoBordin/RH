@@ -11,9 +11,7 @@ namespace RH.Repository.Interface
 
         Task SetarPesoVagaTecnologiaRequisito(VagaTecnologiaRequisito vagaTecnologiaRequ);
 
-        Task VincularCandidatoVaga(VinculoCanditadoVaga vinculoCanditadoVaga);
-
-        Task VincularCanditadoVagaTecnologia(VinculoCanditadoVagaTecnologia entidade);
+        Task VincularCandidatoVaga(int idCandidato, int idVaga, List<int> listaTecnologias);
 
         Task VincularVagaTecnologiaRequisito(VagaTecnologiaRequisito entidade);
     }
